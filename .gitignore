@@ -1,0 +1,46 @@
+# .NET / ASP.NET Core
+bin/
+obj/
+out/
+*.user
+*.suo
+*.usersecrets
+*.sln.user
+
+# Build outputs
+**/Debug/
+**/Release/
+**/Publish/
+**/publish/
+**/AppPackages/
+**/Bundle/
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+.nuget/
+nuget.exe
+
+# Visual Studio
+.vs/
+.vscode/
+*.vspscc
+*.vssscc
+*.dbproj.user
+*.dbproj.vspscc
+
+# Rider / ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+*.DotSettings
+
+# Visual Studio Code
+.settings/
+*.code-workspace
+
+# Logs
+*.log
+logs/
+log/
