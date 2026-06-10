@@ -25,5 +25,10 @@ app.MapGet("/users/{userId}/posts/{slug}", (int userId, string slug) =>
     return $"User ID : {userId}, Post Slug : {slug}";
 });
 
+app.MapGet("/products/{id:int:min(0)}", (int id) =>
+{
+    return $"Product ID : {id}";
+});
+
 app.Run();
 
