@@ -30,5 +30,10 @@ app.MapGet("/products/{id:int:min(0)}", (int id) =>
     return $"Product ID : {id}";
 });
 
+
+app.MapPost("/products",() => {
+    
+});
+
 app.Run();
 
