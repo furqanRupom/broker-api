@@ -31,9 +31,6 @@ app.MapGet("/products/{id:int:min(0)}", (int id) =>
 });
 
 
-app.MapPost("/products",() => {
-    
-});
 
 app.Run();
 
