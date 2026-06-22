@@ -30,7 +30,12 @@ app.MapGet("/products/{id:int:min(0)}", (int id) =>
     return $"Product ID : {id}";
 });
 
+app.MapGet("/report/{year?}",(int? year) => {
+   return $"Report of the ${year}"; 
+});
 
-
+app.MapGet("/search",(string? q, int page=2) => {
+   return $"Searching for q : {q} on page {2}"; 
+});
 app.Run();
 
