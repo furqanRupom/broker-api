@@ -37,5 +37,6 @@ app.MapGet("/report/{year?}",(int? year) => {
 app.MapGet("/search",(string? q, int page=2) => {
    return $"Searching for q : {q} on page {2}"; 
 });
+// we will add more APIs on it
 app.Run();
 
