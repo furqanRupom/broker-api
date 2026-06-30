@@ -38,5 +38,8 @@ app.MapGet("/search",(string? q, int page=2) => {
    return $"Searching for q : {q} on page {2}"; 
 });
 
+app.MapGet("/search/products",(string? q, int page=2) => {
+   return $"Searching for q : {q} on page {2}"; 
+});
 app.Run();
 
