@@ -3,9 +3,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.UseUrls("http://localhost:5190");
 builder.Services.AddHttpLogging((o) => {});
+builder.Services.AddControllers();
 var app = builder.Build();
 
 app.UseHttpLogging();
+app.MapControllers();
 
 app.Use( async (context,next) => {
 	await next.Invoke();
