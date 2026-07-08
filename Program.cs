@@ -12,43 +12,44 @@ app.MapControllers();
 
 app.Use(
 async (context, next) =>
-{
-    var myService = context.RequestServices.GetRequiredService<IMyService>();
-    myService.LogCreation("Frist Middleware");
-    await next.Invoke();
-}
+    {
+        var myService = context.RequestServices.GetRequiredService<IMyService>();
+        myService.LogCreation("Frist Middleware");
+        await next.Invoke();
+    }
 );
 
 
 app.Use(
 async (context, next) =>
-{
-    var myService = context.RequestServices.GetRequiredService<IMyService>();
-    myService.LogCreation("Second Middleware");
-    await next.Invoke();
-}
+    {
+        var myService = context.RequestServices.GetRequiredService<IMyService>();
+        myService.LogCreation("Second Middleware");
+        await next.Invoke();
+    }
 );
 
 app.Use(
 async (context, next) =>
-{
-    var myService = context.RequestServices.GetRequiredService<IMyService>();
-    myService.LogCreation("Third Middleware");
-    await next.Invoke();
-}
+    {
+        var myService = context.RequestServices.GetRequiredService<IMyService>();
+        myService.LogCreation("Third Middleware");
+        await next.Invoke();
+    }
 );
 app.MapGet("/", () => "Hello World");
 
-app.MapGet("/hello", (IMyService myService) =>
-{
-    myService.LogCreation("Hello! Im from hello routes");
-    return Results.Ok("Check the console");
-});
+app.MapGet("/hello",
+(IMyService myService) =>
+    {
+        myService.LogCreation("Hello! Im from hello routes");
+        return Results.Ok("Check the console");
+    }
+);
 
 
 app.Run();
 
-// Depedency Injection in dotent
 
 
 
