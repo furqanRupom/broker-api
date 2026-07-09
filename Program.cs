@@ -1,4 +1,4 @@
-
+using System.Text.Json;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.UseUrls("http://localhost:5190");
@@ -47,6 +47,24 @@ app.MapGet("/hello",
     }
 );
 
+// Serialization - Json Serializar
+
+var product = new Product { Name = "Apple Phone", Description = "Nice Apple Phone", Price = 12.22 };
+app.MapGet("/manual-json", () =>
+{
+    var jsonString = JsonSerializer.Serialize(product);
+    return TypedResults.Text(jsonString, "application/json");
+});
+
+app.MapGet("/json", () =>
+{
+    return TypedResults.Json(product);
+});
+
+app.MapGet("/auto", () =>
+{
+    return product;
+});
 
 app.Run();
 
