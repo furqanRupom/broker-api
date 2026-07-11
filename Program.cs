@@ -67,6 +67,10 @@ app.MapGet("/auto", () =>
     return product;
 });
 
+app.MapGet("/auto/two", () =>
+{
+    return product;
+});
 app.Run();
 
 
