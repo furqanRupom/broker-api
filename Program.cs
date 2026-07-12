@@ -10,42 +10,42 @@ var app = builder.Build();
 app.UseHttpLogging();
 app.MapControllers();
 
-app.Use(
-async (context, next) =>
-    {
-        var myService = context.RequestServices.GetRequiredService<IMyService>();
-        myService.LogCreation("Frist Middleware");
-        await next.Invoke();
-    }
-);
+// app.Use(
+// async (context, next) =>
+//     {
+//         var myService = context.RequestServices.GetRequiredService<IMyService>();
+//         myService.LogCreation("Frist Middleware");
+//         await next.Invoke();
+//     }
+// );
 
 
-app.Use(
-async (context, next) =>
-    {
-        var myService = context.RequestServices.GetRequiredService<IMyService>();
-        myService.LogCreation("Second Middleware");
-        await next.Invoke();
-    }
-);
+// app.Use(
+// async (context, next) =>
+//     {
+//         var myService = context.RequestServices.GetRequiredService<IMyService>();
+//         myService.LogCreation("Second Middleware");
+//         await next.Invoke();
+//     }
+// );
 
-app.Use(
-async (context, next) =>
-    {
-        var myService = context.RequestServices.GetRequiredService<IMyService>();
-        myService.LogCreation("Third Middleware");
-        await next.Invoke();
-    }
-);
+// app.Use(
+// async (context, next) =>
+//     {
+//         var myService = context.RequestServices.GetRequiredService<IMyService>();
+//         myService.LogCreation("Third Middleware");
+//         await next.Invoke();
+//     }
+// );
 app.MapGet("/", () => "Hello World");
 
-app.MapGet("/hello",
-(IMyService myService) =>
-    {
-        myService.LogCreation("Hello! Im from hello routes");
-        return Results.Ok("Check the console");
-    }
-);
+// app.MapGet("/hello",
+// (IMyService myService) =>
+//     {
+//         myService.LogCreation("Hello! Im from hello routes");
+//         return Results.Ok("Check the console");
+//     }
+// );
 
 // Serialization - Json Serializar
 
@@ -67,10 +67,17 @@ app.MapGet("/auto", () =>
     return product;
 });
 
-app.MapGet("/auto/two", () =>
-{
-    return product;
+// Derializer  - Json Derializer
+
+app.MapGet("/d/auto",(Product productFromClient)=>{
+    return TypedResults.Ok(productFromClient);
 });
+
+app.MapPost("/d/json",(HttpContext context)=> {
+    var product = context.Request.ReadFromJsonAsync<Product>();
+    return TypedResults.Json(product);
+});
+
 app.Run();
 
 
