@@ -69,17 +69,23 @@ app.MapGet("/auto", () =>
 
 // Derializer  - Json Derializer
 
-app.MapGet("/d/auto",(Product productFromClient)=>{
-    return TypedResults.Ok(productFromClient);
+app.MapGet("/d/auto", (Person PersonFromClient) =>
+{
+    return TypedResults.Ok(PersonFromClient);
 });
 
-app.MapPost("/d/json",(HttpContext context)=> {
-    var product = context.Request.ReadFromJsonAsync<Product>();
-    return TypedResults.Json(product);
+app.MapPost("/d/json", (HttpContext context) =>
+{
+    var person = context.Request.ReadFromJsonAsync<Person>();
+    return TypedResults.Json(person);
 });
 
 app.Run();
 
-
+public class Person
+{
+    public string? FullName { get; set; }
+    public bool IsActive { get; set; }
+}
 
 
