@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.UseUrls("http://localhost:5190");
@@ -69,17 +70,26 @@ app.MapGet("/auto", () =>
 
 // Derializer  - Json Derializer
 
-app.MapGet("/d/auto", (Person PersonFromClient) =>
+app.MapPost("/d/auto", (Person PersonFromClient) =>
 {
     return TypedResults.Ok(PersonFromClient);
 });
 
-app.MapPost("/d/json", (HttpContext context) =>
+app.MapPost("/d/json", async (HttpContext context) =>
 {
-    var person = context.Request.ReadFromJsonAsync<Person>();
+    var person = await context.Request.ReadFromJsonAsync<Person>();
     return TypedResults.Json(person);
 });
 
+app.MapPost("/d/custom-options", async (HttpContext context) =>
+{
+    var options = new JsonSerializerOptions
+    {
+        UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow
+    };
+    var person = await context.Request.ReadFromJsonAsync<Person>(options);
+    return TypedResults.Json(person);
+});
 app.Run();
 
 public class Person
