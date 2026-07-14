@@ -90,11 +90,16 @@ app.MapPost("/d/custom-options", async (HttpContext context) =>
     var person = await context.Request.ReadFromJsonAsync<Person>(options);
     return TypedResults.Json(person);
 });
+
+
+
+
 app.Run();
 
 public class Person
 {
     public string? FullName { get; set; }
+    public string Password {get; set;}
     public bool IsActive { get; set; }
 }
 
